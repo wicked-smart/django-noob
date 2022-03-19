@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            booom!
+        </title>
+    </head>
+    <body>
+        {% if message %}
+            <h1>{{ message }}</h1>
+        {% elif  name %}
+            <h1 style="color: red;">Entered name is :- {{ name }}</h1>
+        {% endif %}
+        <form action="{% url 'display' %}" method="post">
+            {% csrf_token %}
+            <input name="foo" type="text">
+             <input type="submit" name="display the name!">
+        </form>
+        
+    </body>
+</html>

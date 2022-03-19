@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            logged in!
+        </title>
+    </head>
+    <body>
+
+        {% if username %}
+            <h1>username:= {{ username }}</h1>
+            <h1>password:= {{ password }}</h1>
+        {% else %}
+            <h1>username , password not valid!</h1>
+        {% endif %}
+    </body>
+
+</html>
