@@ -1,4 +1,5 @@
 
+from queue import Empty
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -20,7 +21,8 @@ def redirect_to_index(request):
 def login(request):
     name = request.POST["user"]
     password = request.POST["password"]
-    print(request.POST)
+    #print(request.session)
+
 
     if name is "" or password is "":
         return render(request, "hello/index.html", {
@@ -28,14 +30,21 @@ def login(request):
         })
 
     else:
-        if name == "Prem" and password == "password":
+        ans = Userr.objects.filter(name=request.POST["user"])
+        if len(ans) == 0:
             return render(request, "hello/index.html",{
-                "message" : "User is logged in !"
-            } )
+                "message" : "User not registered Yet! Please Register "
+            })
         else:
-            return render(request, "hello/index.html",{
-                "message" : "Invalid entry!"
-            } )
+            if ans[0].password == request.POST["password"]:
+                
+
+                request.session["user_id"] = ans[0].id
+                
+                return render(request, "hello/index.html", {
+                    "message" : "User is logged in with session id:- " + str(request.session["user_id"]),
+                    
+                })
 
 
 def register(request):
@@ -54,6 +63,30 @@ def register(request):
             return render(request, "hello/register.html", {
                 "message": "User already exists!"
             })
+
+
+def logout(request):
+    try:
+        print(request.session["user_id"])
+        del request.session['user_id']
+        try:
+            print(request.session['user_id'])
+        except KeyError:
+            print("ID does not exists!")
+
+        return render(request, 'hello/index.html', {
+        "message": "you're logged out"
+    })
+
+    except KeyError:
+        return render(request, 'hello/index.html', {
+        "message": "you're already logged out"
+    })
+
+
+    
+    
+
 
                  
 
