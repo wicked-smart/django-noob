@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Register me not!
+        </title>
+    </head>
+    <body>
+        {% if message %}
+            <div>
+                <h1 style="color: red">{{ message }}</h1>
+            </div>
+        {% endif %}
+
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="username">
+            <input type="email" name="emailid" placeholder="enter email-id">
+            <input type="password" name="pass" placeholder="password">
+            <input type="submit" value="register">
+        </form>
+
+    </body>
+
+</html>

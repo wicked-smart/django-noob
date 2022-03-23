@@ -2,7 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-class Flights(models.Model):
-    origin  =  models.CharField(max_length=64)
-    destination = models.CharField(max_length=64)
-    duration = models.IntegerField()
+class Userr(models.Model):
+    name = models.CharField(max_length=64)
+    email = models.EmailField()
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"User {self.name} has email {self.email} as id"
+    

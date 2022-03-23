@@ -11,11 +11,17 @@
         {% elif  name %}
             <h1 style="color: red;">Entered name is :- {{ name }}</h1>
         {% endif %}
-        <form action="{% url 'display' %}" method="post">
+        <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <input name="foo" type="text">
-             <input type="submit" name="display the name!">
+            <input name="user" type="text">
+            <br>
+            <input name="password" type="password">
+            <input type="submit">
         </form>
+
+        <br>
+
+        <a href="{% url 'register' %}">click here to Sign-up!</a>
         
     </body>
 </html>
