@@ -10,6 +10,10 @@
             <div>
                 <h1 style="color: red">{{ message }}</h1>
             </div>
+
+            <a href="{% url 'login' %}">Log in </a>
+            <br>
+            <br>
         {% endif %}
 
         <form action="{% url 'register' %}" method="post">

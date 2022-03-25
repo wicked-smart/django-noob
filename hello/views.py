@@ -19,6 +19,10 @@ def redirect_to_index(request):
     return HttpResponseRedirect(foo)
 
 def login(request):
+
+    if request.method == "GET":
+        return HttpResponseRedirect(reverse("index"))
+
     name = request.POST["user"]
     password = request.POST["password"]
     #print(request.session)
